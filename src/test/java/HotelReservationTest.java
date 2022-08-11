@@ -30,4 +30,5 @@ public class HotelReservationTest {
         Hotel hotel = hotelReservationService.getCheapestHotel("13-08-2022", "14-08-2022");
         Assertions.assertEquals("Bridgewood", hotel.getName());
     }
+    
 }
