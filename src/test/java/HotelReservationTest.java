@@ -20,20 +20,20 @@ public class HotelReservationTest {
     }
 
     @Test
-    void givenCheckInAndCheckOutDates_ShouldReturn_CheapestHotel() {
-        Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("01-08-2022", "10-08-2022",false);
+    void givenCheckInAndCheckOutDates_ShouldReturn_CheapestHotel() throws DateFormatException {
+        Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("01-08-2022", "10-08-2022", HotelReservationService.CustomerType.REGULAR);
         Assertions.assertEquals("Lakewood", hotel.getName());
     }
 
     @Test
-    void givenWeekendDates_ShouldReturn_CheapestHotel() {
-        Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("13-08-2022", "14-08-2022",false);
+    void givenWeekendDates_ShouldReturn_CheapestHotel() throws DateFormatException {
+        Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("13-08-2022", "14-08-2022", HotelReservationService.CustomerType.REGULAR);
         Assertions.assertEquals("Bridgewood", hotel.getName());
     }
 
     @Test
-    void givenDateRange_ShouldReturn_CheapestBestRatedHotel() {
-        Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("12-09-2020", "13-09-2020",false);
+    void givenDateRange_ShouldReturn_CheapestBestRatedHotel() throws DateFormatException {
+        Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("12-09-2020", "13-09-2020", HotelReservationService.CustomerType.REGULAR);
         Assertions.assertEquals("Bridgewood", hotel.getName());
     }
 
@@ -44,8 +44,19 @@ public class HotelReservationTest {
     }
 
     @Test
-    void givenWeekendDates_ForRewardedCustomersReturn_CheapestHotel() {
-        Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("10-08-2022", "15-08-2022",true);
+    void givenWeekendDates_ForRewardedCustomersReturn_CheapestHotel() throws DateFormatException {
+        Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("12-09-2020", "13-09-2020", HotelReservationService.CustomerType.REWARDED);
         Assertions.assertEquals("Ridgewood", hotel.getName());
+    }
+
+    @Test
+    void givenDate_WhenValidFormat_shouldReturnTrue() throws DateFormatException {
+        boolean result = hotelReservationService.validateInputDate("01-01-2000");
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    void givenDate_WhenInValidFormat_shouldThrowException() {
+        Assertions.assertThrows(DateFormatException.class, () -> hotelReservationService.validateInputDate("0101-2000"));
     }
 }
