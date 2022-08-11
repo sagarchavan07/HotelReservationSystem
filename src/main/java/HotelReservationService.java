@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class HotelReservationService {
-    static Scanner scanner = new Scanner(System.in);
     List<Hotel> hotelList = new ArrayList<>();
 
     boolean addHotel(Hotel hotel) {
@@ -13,7 +12,13 @@ public class HotelReservationService {
         return true;
     }
 
-    Hotel getCheapestBestRatedHotel(String checkInDate, String checkOutDate) {
+    Hotel getCheapestBestRatedHotel(String checkInDate, String checkOutDate,boolean isRewardedCustomer) {
+        if (isRewardedCustomer) {
+            hotelList.forEach(hotel ->{
+                hotel.setWeekdayRate(hotel.getWeekdayRewardedRate());
+                hotel.setWeekendRate(hotel.getWeekendRewardedRate());
+            } );
+        }
         LocalDate inDate = LocalDate.of(Integer.valueOf(checkInDate.substring(6, 10)), Integer.valueOf(checkInDate.substring(3, 5)), Integer.valueOf(checkInDate.substring(0, 2)));
         LocalDate outDate = LocalDate.of(Integer.valueOf(checkOutDate.substring(6, 10)), Integer.valueOf(checkOutDate.substring(3, 5)), Integer.valueOf(checkOutDate.substring(0, 2)));
 
@@ -33,8 +38,7 @@ public class HotelReservationService {
     }
 
     long getNumberOfDays(LocalDate checkInDate, LocalDate checkOutDate) {
-        int totalDays = (int) checkInDate.datesUntil(checkOutDate).count();
-        return totalDays;
+        return (int) checkInDate.datesUntil(checkOutDate).count();
     }
 
     long getNumberOfWeekendDays(LocalDate checkInDate, LocalDate checkOutDate) {
