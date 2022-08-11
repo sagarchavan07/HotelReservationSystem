@@ -13,7 +13,7 @@ public class HotelReservationMain {
         String checkInDate = scanner.nextLine();
         System.out.println("Enter check-out date: (dd-mm=yyyy)");
         String checkOutDate = scanner.nextLine();
-        Hotel cheapestHotel = hotelReservationService.getCheapestHotel(checkInDate, checkOutDate);
-        System.out.println("Cheapest Hotel: " + cheapestHotel.getName() + ", Total Cost: " + cheapestHotel.getTotalCost());
+        Hotel cheapestHotel = hotelReservationService.getCheapestBestRatedHotel(checkInDate, checkOutDate);
+        System.out.println("Cheapest Hotel: " + cheapestHotel.getName() + ", Ratings : " + cheapestHotel.getRatings() + ", Total Cost: " + cheapestHotel.getTotalCost());
     }
 }
