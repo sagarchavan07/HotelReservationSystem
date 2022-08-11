@@ -8,14 +8,14 @@ public class HotelReservationTest {
     @BeforeAll
     static void initialize() {
         hotelReservationService = new HotelReservationService();
-        hotelReservationService.addHotel(new Hotel("Lakewood", 110, 90));
-        hotelReservationService.addHotel(new Hotel("Bridgewood", 160, 60));
-        hotelReservationService.addHotel(new Hotel("Ridgewood", 220, 150));
+        hotelReservationService.addHotel(new Hotel("Lakewood", 110, 90, 3));
+        hotelReservationService.addHotel(new Hotel("Bridgewood", 160, 60, 4));
+        hotelReservationService.addHotel(new Hotel("Ridgewood", 220, 150, 5));
     }
 
     @Test
     void givenHotel_ShouldBe_AddedToHotelList() {
-        boolean result = hotelReservationService.addHotel(new Hotel("Lakewood", 110, 90));
+        boolean result = hotelReservationService.addHotel(new Hotel("Lakewood", 110, 90, 3));
         Assertions.assertTrue(result);
     }
 
