@@ -36,4 +36,10 @@ public class HotelReservationTest {
         Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("12-09-2020", "13-09-2020");
         Assertions.assertEquals("Bridgewood", hotel.getName());
     }
+
+    @Test
+    void customerShould_getBestRatedHotel() {
+        Hotel hotel = hotelReservationService.getBestRatedHotel();
+        Assertions.assertEquals("Ridgewood", hotel.getName());
+    }
 }

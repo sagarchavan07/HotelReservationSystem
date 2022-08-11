@@ -22,12 +22,14 @@ public class HotelReservationService {
         long weekDays = totalNumberOfDays - weekendDays;
 
         calculateTotalCost(weekDays, weekendDays);
-        List<Hotel> hotelSortedList = hotelList.stream().sorted((x, y) -> Long.compare(x.getTotalCost(), y.getTotalCost())).collect(Collectors.toList());
-        if (hotelSortedList.get(0).getTotalCost() == hotelSortedList.get(1).getTotalCost()) {
-            return (hotelSortedList.get(0).getRatings() > hotelSortedList.get(1).getRatings()) ? hotelSortedList.get(0) : hotelSortedList.get(1);
-        } else {
-            return hotelSortedList.get(0);
-        }
+        List<Hotel> hotelList1 = hotelList.stream().sorted((x, y) -> Long.compare(x.getTotalCost(), y.getTotalCost())).collect(Collectors.toList());
+        List<Hotel> hotelList2 = hotelList1.stream().filter(x -> x.getTotalCost() == hotelList1.get(0).getTotalCost()).sorted((x, y) -> Integer.compare(y.getRatings(), x.getRatings())).collect(Collectors.toList());
+
+        return hotelList2.get(0);
+    }
+
+    Hotel getBestRatedHotel() {
+        return hotelList.stream().sorted((x, y) -> Integer.compare(y.getRatings(), x.getRatings())).collect(Collectors.toList()).get(0);
     }
 
     long getNumberOfDays(LocalDate checkInDate, LocalDate checkOutDate) {
