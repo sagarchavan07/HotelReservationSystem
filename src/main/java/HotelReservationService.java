@@ -13,7 +13,12 @@ public class HotelReservationService {
     }
 
     Hotel getCheapestBestRatedHotel(String checkInDate, String checkOutDate,boolean isRewardedCustomer) {
-       
+        if (isRewardedCustomer) {
+            hotelList.forEach(hotel ->{
+                hotel.setWeekdayRate(hotel.getWeekdayRewardedRate());
+                hotel.setWeekendRate(hotel.getWeekendRewardedRate());
+            } );
+        }
         LocalDate inDate = LocalDate.of(Integer.valueOf(checkInDate.substring(6, 10)), Integer.valueOf(checkInDate.substring(3, 5)), Integer.valueOf(checkInDate.substring(0, 2)));
         LocalDate outDate = LocalDate.of(Integer.valueOf(checkOutDate.substring(6, 10)), Integer.valueOf(checkOutDate.substring(3, 5)), Integer.valueOf(checkOutDate.substring(0, 2)));
 
