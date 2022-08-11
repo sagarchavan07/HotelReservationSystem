@@ -13,7 +13,7 @@ public class HotelReservationService {
         return true;
     }
 
-    Hotel getCheapestHotel(String checkInDate, String checkOutDate) {
+    Hotel getCheapestBestRatedHotel(String checkInDate, String checkOutDate) {
         LocalDate inDate = LocalDate.of(Integer.valueOf(checkInDate.substring(6, 10)), Integer.valueOf(checkInDate.substring(3, 5)), Integer.valueOf(checkInDate.substring(0, 2)));
         LocalDate outDate = LocalDate.of(Integer.valueOf(checkOutDate.substring(6, 10)), Integer.valueOf(checkOutDate.substring(3, 5)), Integer.valueOf(checkOutDate.substring(0, 2)));
 
@@ -22,8 +22,12 @@ public class HotelReservationService {
         long weekDays = totalNumberOfDays - weekendDays;
 
         calculateTotalCost(weekDays, weekendDays);
-        Hotel cheapestHotel = hotelList.stream().sorted((x, y) -> Long.compare(x.getTotalCost(), y.getTotalCost())).collect(Collectors.toList()).get(0);
-        return cheapestHotel;
+        List<Hotel> hotelSortedList = hotelList.stream().sorted((x, y) -> Long.compare(x.getTotalCost(), y.getTotalCost())).collect(Collectors.toList());
+        if (hotelSortedList.get(0).getTotalCost() == hotelSortedList.get(1).getTotalCost()) {
+            return (hotelSortedList.get(0).getRatings() > hotelSortedList.get(1).getRatings()) ? hotelSortedList.get(0) : hotelSortedList.get(1);
+        } else {
+            return hotelSortedList.get(0);
+        }
     }
 
     long getNumberOfDays(LocalDate checkInDate, LocalDate checkOutDate) {

@@ -21,13 +21,19 @@ public class HotelReservationTest {
 
     @Test
     void givenCheckInAndCheckOutDates_ShouldReturn_CheapestHotel() {
-        Hotel hotel = hotelReservationService.getCheapestHotel("01-08-2022", "10-08-2022");
+        Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("01-08-2022", "10-08-2022");
         Assertions.assertEquals("Lakewood", hotel.getName());
     }
 
     @Test
     void givenWeekendDates_ShouldReturn_CheapestHotel() {
-        Hotel hotel = hotelReservationService.getCheapestHotel("13-08-2022", "14-08-2022");
+        Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("13-08-2022", "14-08-2022");
+        Assertions.assertEquals("Bridgewood", hotel.getName());
+    }
+
+    @Test
+    void givenDateRange_ShouldReturn_CheapestBestRatedHotel() {
+        Hotel hotel = hotelReservationService.getCheapestBestRatedHotel("12-09-2020", "13-09-2020");
         Assertions.assertEquals("Bridgewood", hotel.getName());
     }
 }
