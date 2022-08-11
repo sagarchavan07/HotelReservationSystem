@@ -18,5 +18,8 @@ public class HotelReservationMain {
         Hotel cheapestHotel = hotelReservationService.getCheapestBestRatedHotel(checkInDate, checkOutDate, HotelReservationService.CustomerType.REWARDED);
         System.out.println("Cheapest Hotel for Rewarded customer: " + cheapestHotel.getName() + ", Ratings : " + cheapestHotel.getRating() + ", Total Cost: " + cheapestHotel.getTotalCost());
 
+        Hotel cheapestHotel1 = hotelReservationService.getCheapestBestRatedHotel(checkInDate, checkOutDate, HotelReservationService.CustomerType.REGULAR);
+        System.out.println("Cheapest Hotel for Regular customer: " + cheapestHotel1.getName() + ", Ratings : " + cheapestHotel1.getRatings() + ", Total Cost: " + cheapestHotel1.getTotalCost());
+
     }
 }
