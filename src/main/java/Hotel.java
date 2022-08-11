@@ -2,12 +2,14 @@ public class Hotel {
     private final String name;
     private final int weekdayRate;
     private final int weekendRate;
+    private final int ratings;
     private long totalCost;
 
-    public Hotel(String name, int weekdayRate, int weekendRate) {
+    public Hotel(String name, int weekdayRate, int weekendRate, int ratings) {
         this.name = name;
         this.weekdayRate = weekdayRate;
         this.weekendRate = weekendRate;
+        this.ratings = ratings;
     }
 
     public String getName() {
